@@ -1,5 +1,5 @@
 import { ApolloServer } from "@apollo/server";
-import { resolvers } from "./resolvers.js";
+import { resolvers } from "./resolvers";
 import { readFile } from 'node:fs/promises';
 import { expressMiddleware } from '@apollo/server/express4';
 import cors from 'cors';
