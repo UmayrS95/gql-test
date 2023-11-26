@@ -1,16 +1,16 @@
-import fs from 'fs'
-import csv from 'csv-parser'
-import { Customer, Product } from '../interfaces';
+import * as fs from "fs";
+import * as path from "path";
+import Papa from 'papaparse';
 
-export const loadCSVData = (filePath: string): Array<any> => {
-  const data: Array<Customer | Product> = new Array();
-  fs.createReadStream(filePath)
-    .pipe(csv())
-    .on('data', (row: Customer | Product) => {
-      data.push(row);
-    })
-    .on('end', () => {
-      console.log(`CSV file ${filePath} successfully processed.`);
-    });
+export const loadCSVData = (fileName: string): any => {
+
+  const csvFilePath = path.resolve(__dirname, fileName);
+  const fileContent = fs.readFileSync(csvFilePath, { encoding: 'utf-8' });
+
+  const { data } = Papa.parse(fileContent, {
+    delimiter: ',',
+    header: true,
+  });
+  
   return data;
 };

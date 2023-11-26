@@ -3,17 +3,27 @@ import { loadCSVData } from "./utils/serverUtils";
 
 export const resolvers: { Query: Query } = {
   Query: {
-    customers: (): Array<Customer> => {
-      return loadCSVData('/Users/ushaffi/dev/gql-test/server/resources/customers.csv')
+    customers: (): Customer[] => {      
+      const customerData = loadCSVData('customers.csv');
+
+      return customerData.map((record: any) => ({
+        email: record.email,
+        forename: record.forename,
+        surname: record.surname,
+        contactNumber: record.contact_number,
+        postcode: record.postcode,
+      }));
     },
-    products: (): Product => {
-      return { 
-        vin: "vin", 
-        colour: "colour",
-        make: "make", 
-        model: "model", 
-        price: 1000
-      }
+    products: (): Product[] => {
+      const productsData = loadCSVData("products.csv");
+
+      return productsData.map((record: any) => ({
+        vin: record.vin,
+        make: record.make,
+        model: record.model,
+        price: record.price,
+        colour: record.colour,
+      }));
     }
   } 
 };

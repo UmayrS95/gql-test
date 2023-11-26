@@ -1,6 +1,6 @@
 type Query {
-  customers: Customer
-  products: Product
+  customers: [Customer]
+  products: [Product]
 }
 
 type Customer {

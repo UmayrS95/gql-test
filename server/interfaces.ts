@@ -15,6 +15,6 @@ export interface Product {
 }
 
 export interface Query {
-  customers: () => Array<Customer>;
-  products: () => Product;
+  customers: () => Customer[];
+  products: () => Product[];
 }
